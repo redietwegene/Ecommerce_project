@@ -6,6 +6,7 @@ import cors from 'cors';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import cloudinary from 'cloudinary';
+import { Product } from './Model/product';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -33,22 +34,6 @@ mongoose
   })
   .catch((error) => console.log(error));
 
-const dataSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  imageUrl: {
-    type: String,
-    required: true,
-  },
-  price: {
-    type: Number,
-    required: true,
-  }
-});
-
-const Product = mongoose.model("Product", dataSchema);
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
