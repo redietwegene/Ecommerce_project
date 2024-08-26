@@ -6,7 +6,8 @@ import cors from 'cors';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import cloudinary from 'cloudinary';
-import { Product } from './Model/product';
+import { Product } from './Model/product.js';
+import { Cart } from './Model/cart.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -87,3 +88,13 @@ app.get("/products", async (req, res) => {
     });
   }
 });
+app.post("/cart", (req, res) => {
+  const { name, imageUrl, price } = req.body;
+  const cart = new Cart({
+    name,
+    imageUrl,
+    price
+  });
+  cart.save();
+res.status(200).json(cart)
+})
