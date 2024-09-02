@@ -12,14 +12,20 @@ function Prodcutlist(){
           .catch(error => console.log("Error in fetching items", error));
     }, []);
  const handleCart = (product) => {
-    axios.post("http://localhost:3000/cart", { product })
+    axios.post("http://localhost:3000/cart", product)
         .then(response => {
             console.log("Product added to cart successfully");
         })
         .catch(e => {
-            console.log("Error adding product to cart:", e);
+            if (e.response && e.response.status === 400) {
+                console.log("Error adding product to cart:", e.response.data.message);
+                alert(e.response.data.message); // Display the server message to the user
+            } else {
+                console.log("An unexpected error occurred:", e);
+            }
         });
 };
+
 
     
     return(

@@ -88,13 +88,41 @@ app.get("/products", async (req, res) => {
     });
   }
 });
-app.post("/cart", (req, res) => {
-  const { name, imageUrl, price } = req.body;
-  const cart = new Cart({
-    name,
-    imageUrl,
-    price
-  });
-  cart.save();
-res.status(200).json(cart)
+app.post("/cart", async (req, res) => {
+  try {
+    const { name, imageUrl, price } = req.body;
+
+   
+    const existingItem = await Cart.findOne({ name: name });
+    if (existingItem) {
+      return res.status(400).json({
+        message: "Item is already in the cart",
+      });
+    }
+
+    const cart = new Cart({
+      name,
+      imageUrl,
+      price,
+    });
+
+    await cart.save();
+    console.log("Added to cart successfully");
+    res.status(200).json(cart);
+
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({ message: "An error occurred" });
+  }
+});
+app.get('/cart', async (req, res) => {
+  try {
+    const cart = await Cart.find({});
+    res.status(200).json(cart)
+    
+  } catch (error) {
+    res.status(500).json({
+      message:"error in fetching item"
+    })
+  }
 })
