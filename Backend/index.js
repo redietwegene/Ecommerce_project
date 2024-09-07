@@ -126,13 +126,22 @@ app.get('/cart', async (req, res) => {
     })
   }
 })
-app.post("/delete/:id", async(req, res) => {
+app.post("/delete/:id", async (req, res) => {
   try {
-    const id = req.params.id
-     const deleteProduct =await Cart.findByIdAndDelete(id);
-        res.sendStatus(200);
+    const id = req.params.id;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).send('Invalid ID format');
+    }
 
-  } catch (err){
-    console.log(err)
+    const deleteProduct = await Cart.findByIdAndDelete(id);
+
+    if (!deleteProduct) {
+      return res.status(404).send('Product not found');
+    }
+
+    res.status(200).send({ message: 'Product deleted successfully' });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Internal server error');
   }
-})
+});
