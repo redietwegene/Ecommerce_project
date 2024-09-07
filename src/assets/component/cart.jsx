@@ -10,7 +10,15 @@ const Cart = () => {
             .get("http://localhost:3000/cart")
             .then(response => setCart(response.data))
             .catch(err=>console.log(err))
-    })
+    },[])
+    const handleDelete = (product) => {
+        try {
+            axios.post(`http://localhost:3000/delete/${product}`)
+        } catch (err) {
+            console.log(err)
+        }
+        
+    }
     return (
         <div>
              <div>
@@ -19,6 +27,7 @@ const Cart = () => {
                         <img src={item.imageUrl}/>
                         <p> {item.name}</p>
                         <p>{item.price}</p>
+                        <button onClick={()=>handleDelete(item._id)}>Delete</button>
 
                     </div>
 

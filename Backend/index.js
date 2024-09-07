@@ -126,3 +126,13 @@ app.get('/cart', async (req, res) => {
     })
   }
 })
+app.post("/delete/:id", async(req, res) => {
+  try {
+    const id = req.params.id
+     const deleteProduct =await Cart.findByIdAndDelete(id);
+        res.sendStatus(200);
+
+  } catch (err){
+    console.log(err)
+  }
+})
