@@ -16,7 +16,7 @@ function App() {
       {/* <Product /> */}
       <Prodcutlist />
   
-    {/* <Admin/> */}
+    <Admin/>
 <div>
   
                 <Routes>
