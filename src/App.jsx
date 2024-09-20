@@ -13,8 +13,8 @@ function App() {
   return (
     <div>
        <Navbar/>
-      {/* <Product /> */}
-      <Prodcutlist />
+      <Product />
+      {/* <Prodcutlist /> */}
   
     <Admin/>
 <div>
