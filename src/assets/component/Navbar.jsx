@@ -1,26 +1,32 @@
 // Navbar.js
 import React from "react";
 import { Link } from "react-router-dom";
+
 // import "./Navbar.css";
 
 function Navbar() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <div className='top_nav'>
-        <div className="logo">
-          <img className="logo_pic" src="logo.webp" alt='logo'/> 
-          <h4>sam shopping</h4>
+    <>
+        <div >
+           <div className="bg-gray-200 shadow-lg rounded-2xl mb-4" >
+            <div className="flex justify-between mr-3 p-2">
+                <div className="flex gap-3  ">
+                    <img src="/image/download.jpg" alt="logo" className="w-10 rounded-lg " />
+                    <p className="text-amber-900 font-langar text-30 "> Qene Tibeb</p>
+                </div>
+                <div className=" flex justify-between gap-7 font-langar text-amber-950 m-2">
+                    <Link to ="/"> Home</Link>
+                    <Link to ="/about"> About </Link>
+                    <Link to ="/contact"> contact</Link>
+                    {/* <Link to ="/cart"> cart</Link> */}
+                  
+                   
+                </div>
+            </div>
         </div>
-        <div className="nav_bar">
-          <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/contact">Contact me</a></li>
-            <Link to ="/cart">cart</Link>
-          </ul>
-        </div>
-      </div>
-    </nav>
+            </div>
+            
+            </>
   );
 }
 

@@ -12,7 +12,7 @@ function Prodcutlist(){
           .catch(error => console.log("Error in fetching items", error));
     }, []);
  const handleCart = (product) => {
-    axios.post("http://localhost:3000/cart", product)
+    axios.post("http://localhost:3000/addToCart", product)
         .then(response => {
             console.log("Product added to cart successfully");
         })

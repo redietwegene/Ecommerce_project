@@ -12,10 +12,10 @@ const Cart = () => {
             .catch(err=>console.log(err))
     }, [])
     
-   const handleDelete = async (productId) => {
+   const handleDelete = async (id) => {
     try {
-      await axios.post(`http://localhost:3000/delete/${productId}`);
-      setCart((prevCart) => prevCart.filter((item) => item._id !== productId));
+      await axios.delete(`http://localhost:3000/delete/${id}`);
+      setCart((prevCart) => prevCart.filter((item) => item._id !== id));
     } catch (err) {
       console.log(err);
     }
